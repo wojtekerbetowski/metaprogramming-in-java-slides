@@ -37,6 +37,8 @@
 <section>
     <section>
         <h1>metaprogramming AND jvm</h1>
+        <h2 class="fragment">with CGLib and Plastic</h2>
+        <br />
         <p>Maciej Jankowski</p>
         <p>Wojtek Erbetowski</p>
         <p>
@@ -61,6 +63,14 @@
         <div>http://[blog.]erbetowski.pl</div>
         <div>@wojtassj</div>
     </section>
+    <section>
+        <h2>RoboSpock</h2>
+        <div>
+            <br>
+        </div>
+        <div>Code + docs at <a href="https://github.com/Polidea/Robospock">Polidea/RoboSpock</a></div>
+        <img src="img/classloaders_everywhere.jpg" class="fragment"/>
+    </section>
 </section>
 <section>
     <section>
@@ -68,7 +78,7 @@
         <div>
             <br>
         </div>
-        <div>Instances of the class Class represent classes and interfaces in a running Java application.<img src="&lt;img src=&quot;https://docs.google.com/drawings/pub?id=1yKP5wvKHzJOv2rTIwd2TCJQfo94MqT9xQ4dvG_2vIzk&amp;amp;w=570&amp;amp;h=168" style="line-height: 1.2em; letter-spacing: -0.02em;">
+        <div>Instances of the class Class represent classes and interfaces in a running Java application.
             <br>
         </div>
     </section>
@@ -84,14 +94,14 @@
             <br>
         </div>
         <h2>
-            <img src="http://i.imgur.com/DVOOY.png" style="font: inherit; letter-spacing: -0.02em; text-transform: none;">
+            <img src="img/memory.png" style="font: inherit; letter-spacing: -0.02em; text-transform: none;">
             <br>
         </h2>
     </section>
     <section>
         <h2>new class() ?</h2>
         <div class="fragment">
-<pre><code contenteditable="" style="font-size: 18px; margin-top: 20px;">public static Class&lt;?&gt; forName(String name, boolean initialize,&nbsp;
+<pre><code contenteditable="" style="font-size: 18px; margin-top: 20px;">public static Class&lt;?&gt; forName(String name, boolean initialize,
         ClassLoader loader) throws ClassNotFoundException{
     if (loader == null) {
         SecurityManager sm = System.getSecurityManager();
@@ -107,9 +117,6 @@
 }</code></pre>
         </div>
         <br>
-
-
-
     </section>
     <section>
         <h2>Class for name</h2>
@@ -124,6 +131,9 @@
         </div>
     <pre><code>private static native Class forName0(...)</code></pre>
     </section>
+    <section>
+        <img src="img/compilation.png" />
+    </section>
 </section>
 <section>
     <section>
@@ -132,12 +142,16 @@
     <section>
         <br>
         <div>
-            <blockquote cite="http://docs.oracle.com/javase/7/docs/api">A class loader is an object that is responsible for loading classes. The class ClassLoader is an abstract class. Given the binary name of a class, a class loader should attempt to locate or generate data that constitutes a definition for the class. A typical strategy is to transform the name into a file name and then read a "class file" of that name from a file system.</blockquote>
+            <p>
+                A class loader is an object that is responsible for loading classes. The class ClassLoader is an abstract class.
+            </p>
+            <p class="fragment">
+                Given the binary name of a class, a class loader should attempt to locate or generate data that constitutes a definition for the class.
+            </p>
+            <p class="fragment">
+                A typical strategy is to transform the name into a file name and then read a "class file" of that name from a file system.
+            </p>
         </div>
-
-
-
-
     </section>
     <section>
         <h2>oh yeah!</h2>
