@@ -91,22 +91,20 @@
     <section>
         <h2>new class() ?</h2>
         <div class="fragment">
-<pre>
-        <code contenteditable="" style="font-size: 18px; margin-top: 20px;">public static Class&lt;?&gt; forName(String name, boolean initialize,&nbsp;
-            ClassLoader loader) throws ClassNotFoundException{
-            if (loader == null) {
-            SecurityManager sm = System.getSecurityManager();
-            if (sm != null) {
+<pre><code contenteditable="" style="font-size: 18px; margin-top: 20px;">public static Class&lt;?&gt; forName(String name, boolean initialize,&nbsp;
+        ClassLoader loader) throws ClassNotFoundException{
+    if (loader == null) {
+        SecurityManager sm = System.getSecurityManager();
+        if (sm != null) {
             ClassLoader ccl = ClassLoader.getCallerClassLoader();
             if (ccl != null) {
-            sm.checkPermission(
-            SecurityConstants.GET_CLASSLOADER_PERMISSION);
+                sm.checkPermission(
+                    SecurityConstants.GET_CLASSLOADER_PERMISSION);
             }
-            }
-            }
-            return forName0(name, initialize, loader);
-            }</code>
-    </pre>
+        }
+    }
+    return forName0(name, initialize, loader);
+}</code></pre>
         </div>
         <br>
 
@@ -124,9 +122,7 @@
         <div>
             <br>
         </div>
-<pre>
-        <code>private static native Class forName0(...)</code>
-    </pre>
+    <pre><code>private static native Class forName0(...)</code></pre>
     </section>
 </section>
 <section>
