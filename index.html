@@ -148,11 +148,8 @@
             <br>
         </div>
         <div>
-    <pre>
-            <code>protected final Class<!--?--> defineClass(
-                String name, byte[] b, int off, int len)
-            </code>
-        </pre>
+    <pre><code contenteditable="">protected final Class&lt;?&gt; defineClass(
+        String name, byte[] b, int off, int len)</code></pre>
         </div>
 
     </section>
@@ -295,87 +292,84 @@
     <h2>taking api higher</h2>
     <div>ASM Hello World!</div>
     <div>
-    <pre>
-        <code>     ClassWriter cw = new ClassWriter(0);
-            FieldVisitor fv;
-            MethodVisitor mv;
-            AnnotationVisitor av0;
+    <pre><code contenteditable="">ClassWriter cw = new ClassWriter(0);
+FieldVisitor fv;
+MethodVisitor mv;
+AnnotationVisitor av0;
 
-            cw.visit(49,
-            ACC_PUBLIC + ACC_SUPER,
-            "Hello",
-            null,
-            "java/lang/Object",
-            null);
+cw.visit(49,
+    ACC_PUBLIC + ACC_SUPER,
+    "Hello",
+    null,
+    "java/lang/Object",
+    null);
 
-            cw.visitSource("Hello.java", null);
+cw.visitSource("Hello.java", null);
 
-            {
-            mv = cw.visitMethod(ACC_PUBLIC, "&lt;init&gt;", "()V", null, null);
-            mv.visitVarInsn(ALOAD, 0);
-            mv.visitMethodInsn(INVOKESPECIAL,
-            "java/lang/Object",
-            "&lt;init&gt;",
-            "()V");
-            mv.visitInsn(RETURN);
-            mv.visitMaxs(1, 1);
-            mv.visitEnd();
-            }
-            {
-            mv = cw.visitMethod(ACC_PUBLIC + ACC_STATIC,
-            "main",
-            "([Ljava/lang/String;)V",
-            null,
-            null);
-            mv.visitFieldInsn(GETSTATIC,
-            "java/lang/System",
-            "out",
-            "Ljava/io/PrintStream;");
-            mv.visitLdcInsn("hello");
-            mv.visitMethodInsn(INVOKEVIRTUAL,
-            "java/io/PrintStream",
-            "println",
-            "(Ljava/lang/String;)V");
-            mv.visitInsn(RETURN);
-            mv.visitMaxs(2, 1);
-            mv.visitEnd();
-            }
-            cw.visitEnd();
+{
+    mv = cw.visitMethod(ACC_PUBLIC, "&lt;init&gt;", "()V", null, null);
+    mv.visitVarInsn(ALOAD, 0);
+    mv.visitMethodInsn(INVOKESPECIAL,
+        "java/lang/Object",
+        "&lt;init&gt;",
+        "()V");
 
-            return cw.toByteArray();</code>
-    </pre>
+    mv.visitInsn(RETURN);
+    mv.visitMaxs(1, 1);
+    mv.visitEnd();
+}
+{
+    mv = cw.visitMethod(ACC_PUBLIC + ACC_STATIC,
+        "main",
+        "([Ljava/lang/String;)V",
+        null,
+        null);
+    mv.visitFieldInsn(GETSTATIC,
+        "java/lang/System",
+        "out",
+        "Ljava/io/PrintStream;");
+    mv.visitLdcInsn("hello");
+    mv.visitMethodInsn(INVOKEVIRTUAL,
+        "java/io/PrintStream",
+        "println",
+        "(Ljava/lang/String;)V");
+    mv.visitInsn(RETURN);
+    mv.visitMaxs(2, 1);
+    mv.visitEnd();
+}
+cw.visitEnd();
+
+return cw.toByteArray();</code></pre>
     </div>
 </section>
 <section>
-    <h2>TAking api higher</h2>
+    <h2>Taking api higher</h2>
     <div>
-    <pre>
-        <code>
-            <pre style="font: inherit; width: 808.1875px; color: rgb(238, 238, 238); background-color: rgba(0, 0, 0, 0.0980392);">
-                <code style="font: inherit;">public class WeekendBlocker implements MethodInterceptor {
-                    public Object invoke(MethodInvocation invocation)&nbsp;</code>
-                <code style="font: inherit;">  throws Throwable {</code>
-                <code style="font: inherit;">
-                    Calendar today = new GregorianCalendar();
-                    if (today.getDisplayName(DAY_OF_WEEK, LONG, ENGLISH).startsWith("S")) {
-                    throw new IllegalStateException(
-                    invocation.getMethod().getName() + " not allowed on weekends!");
-                    }
-                    return invocation.proceed();
-                    }
-                    }</code>
-                <code style="font: inherit;">
-                    <br>
-                </code>
-                <code style="font: inherit;">public class NotOnWeekendsModule extends AbstractModule {
-                    protected void configure() {
-                    bindInterceptor(Matchers.any(), Matchers.annotatedWith(NotOnWeekends.class),
-                    new WeekendBlocker());
-                    }
-                    }</code>
-            </pre>
-        </code>
-    </pre>
+        <pre><code>public class WeekendBlocker implements MethodInterceptor {
+    public Object invoke(MethodInvocation invocation)
+            throws Throwable {
+
+        Calendar today = new GregorianCalendar();
+        if (today.getDisplayName(DAY_OF_WEEK, LONG, ENGLISH)
+                .startsWith("S")) {
+
+            throw new IllegalStateException(
+                invocation.getMethod().getName()
+                    + " not allowed on weekends!");
+        }
+
+        return invocation.proceed();
+    }
+}
+
+public class NotOnWeekendsModule extends AbstractModule {
+    protected void configure() {
+        bindInterceptor(
+            Matchers.any(),
+            Matchers.annotatedWith(NotOnWeekends.class),
+            new WeekendBlocker());
+    }
+}</code></pre>
     </div>
 </section>
 </section>
